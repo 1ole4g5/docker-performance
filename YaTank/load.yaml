@@ -1,0 +1,43 @@
+# load.yaml
+phantom:
+  enabled: true
+  package: yandextank.plugins.Phantom
+  address: ip_address:port_number
+  ssl: true
+  header_http: "1.1"
+  headers:
+    - "[Host: www.host.name]"
+  uris:
+    - /
+  load_profile:
+    load_type: rps
+    schedule: line(1,6000,120s) const(6000, 5m)
+#  writelog: all
+  instances: 4000
+  timeout: 50s
+  
+jmeter:
+  enabled: false
+  package: yandextank.plugins.JMeter
+  jmx: ./testPlan/Sample.jmx
+  jmeter_ver: 5.2
+  buffered_seconds: 30
+  ext_log: none
+  variables:
+    protocol: https
+    host: www.host.name
+    port: 443
+
+console:
+  enabled: true # enable console output
+
+telegraf:
+  enabled: false
+  package: yandextank.plugins.Telegraf
+  config: auto
+
+overload:
+  enabled: true
+  job_name: PROD Add book to cart
+  job_dsc: 8 cores, 16 RAM, 16 swap
+  token_file: token.txt

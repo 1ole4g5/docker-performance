@@ -1,0 +1,22 @@
+version: "3.7"
+
+services:
+  client:
+    build: client/
+    container_name: docker-performance_master
+    tty: true
+    hostname: client
+    depends_on:
+      - server
+    networks:
+      - jmeter_net
+  server:
+    build: server/
+    tty: true
+    networks:
+      - jmeter_net
+  
+networks:
+  jmeter_net:
+    driver: bridge
+
